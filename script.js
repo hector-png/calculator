@@ -36,13 +36,21 @@ function handleButtonEvent(node) {
             mathExpresion.value1 = mathExpresion.value1 + buttonClicked;
             displayContent.innerText = mathExpresion.value1;
         } else if(node.className === 'operand') {
+            if(mathExpresion.value1 && mathExpresion.value2 && !mathExpresion.equalsPressed) {
+                operate();
+                mathExpresion.value1 = mathExpresion.result;
+                mathExpresion.value2 = '';
+                displayContent.innerText = mathExpresion.value1;
+            }
+
             mathExpresion.operand = buttonClicked;
+
             if(mathExpresion.value2 != '' && !mathExpresion.equalsPressed) {
                 operate();
                 mathExpresion.value1 = mathExpresion.result;
                 mathExpresion.value2 = '';
                 displayContent.innerText = mathExpresion.value1;
-            } else {
+            } else if(mathExpresion.equalsPressed) {
                 mathExpresion.equalsPressed = false;
                 mathExpresion.value2 = '';
             }
